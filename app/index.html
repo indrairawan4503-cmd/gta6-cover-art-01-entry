@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Grid — GTA 6 Cover Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <header>
+      <h1>VICE GRID</h1>
+      <p>Four panels, one sunset, your photo. Pick a layout, drop photos into
+      the panels, letter the caption, export the poster.</p>
+    </header>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <div class="photo-row">
+        <button type="button" class="sample" data-sample="pier">Pier photo</button>
+        <button type="button" class="sample" data-sample="boulevard">Boulevard photo</button>
+        <label class="upload">Upload photos
+          <input id="upload" type="file" accept="image/*" multiple>
+        </label>
+      </div>
+      <p class="hint">Tap a sample or upload, and it fills the selected panel.
+      Drag the panel cards below the preview to swap panels.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Selected panel</legend>
+      <div class="panel-pick" id="panelPick" role="group" aria-label="Choose a panel"></div>
+      <label>Zoom <span id="zoomVal">1.00×</span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1">
+      </label>
+      <label>Slide left / right <span id="oxVal">0</span>
+        <input id="ox" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <label>Slide up / down <span id="oyVal">0</span>
+        <input id="oy" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <div class="row">
+        <button type="button" id="fillAll">Fill all panels with this photo</button>
+        <button type="button" id="resetPanel">Reset panel</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Layout &amp; grade</legend>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Panel layout"></div>
+      <div class="seg" id="gradeSeg" role="group" aria-label="Colour grade"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Caption</legend>
+      <label>Title
+        <input id="caption" type="text" maxlength="30" value="Neon Boulevard">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="48" value="A sunset heist in four panels">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Size &amp; export</legend>
+      <div class="seg" id="sizeSeg" role="group" aria-label="Export size"></div>
+      <div class="row">
+        <button type="button" id="export" class="primary">Export PNG</button>
+        <button type="button" id="exportAll">Export all 3 sizes</button>
+      </div>
+      <p id="status" role="status"></p>
+    </fieldset>
+  </section>
+
+  <section class="stage" aria-label="Live preview">
+    <div class="preview-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+      <p class="drag-hint">Click a panel to select it · drag inside a panel to slide its photo</p>
+    </div>
+    <div class="panel-strip" id="panelStrip" aria-label="Panels — drag to rearrange"></div>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
