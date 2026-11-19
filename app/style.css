@@ -1,0 +1,74 @@
+/* Vice Grid editor: dark dusk chrome around a bright poster preview. */
+html, body { margin: 0; min-height: 100%; background: #160a24; color: #f4eef8; font: 15px/1.45 system-ui, sans-serif; }
+* { box-sizing: border-box; }
+
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 22px; max-width: 1480px; margin: 0 auto; }
+.controls { width: 330px; flex: none; display: flex; flex-direction: column; gap: 16px; }
+.controls header h1 {
+  margin: 0; font-size: 34px; letter-spacing: 1px;
+  font-family: "Noto Sans Condensed", "Arial Narrow", sans-serif; font-weight: 900;
+  background: linear-gradient(90deg, #ff7a18, #ff2e88 55%, #b06bff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.controls header p { margin: 6px 0 0; color: #c9b8d6; }
+
+fieldset { border: 1px solid #3a2350; border-radius: 12px; padding: 12px 14px 14px; margin: 0; background: #1f1030; }
+legend { font-weight: 800; font-size: 13px; letter-spacing: 0.4px; color: #ffb35c; padding: 0 6px; }
+.hint { margin: 8px 0 0; font-size: 13px; color: #a793b8; }
+.drag-hint { margin: 8px 0 0; font-size: 13px; color: #a793b8; text-align: center; }
+
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; margin-top: 10px; }
+label:first-child { margin-top: 0; }
+label span { color: #ffb35c; font-weight: 700; }
+input[type=text] { font: inherit; padding: 9px 10px; border: 1px solid #4a2f68; border-radius: 8px; background: #2a1840; color: #fff; }
+input[type=text]:focus { outline: 2px solid #ff2e88; outline-offset: 1px; }
+input[type=range] { width: 100%; accent-color: #ff2e88; }
+input[type=file] { display: none; }
+
+.row { display: flex; gap: 8px; margin-top: 10px; }
+.row button { flex: 1; }
+button { font: inherit; font-weight: 700; padding: 9px 10px; border: 1px solid #4a2f68; border-radius: 8px; background: #2a1840; color: #f4eef8; cursor: pointer; }
+button:hover { border-color: #ff2e88; }
+button.primary { background: linear-gradient(90deg, #ff7a18, #ff2e88); border: 0; color: #fff; }
+button[aria-pressed=true] { background: #ff2e88; border-color: #ff2e88; color: #fff; }
+
+.photo-row { display: flex; gap: 8px; }
+.photo-row .sample { flex: 1; }
+.upload { display: block; margin: 0; text-align: center; padding: 9px 10px; border: 1px dashed #8a6aad; border-radius: 8px; cursor: pointer; flex: 1; }
+.upload:hover { border-color: #ff2e88; }
+
+.seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.seg:first-child { margin-top: 0; }
+.seg button { flex: 1 1 auto; padding: 7px 8px; font-size: 13px; white-space: nowrap; }
+.panel-pick { display: flex; gap: 6px; }
+.panel-pick button { flex: 1; }
+
+#status { margin: 10px 0 0; min-height: 1.2em; font-size: 13px; color: #8fe3a8; }
+
+.stage { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.preview-wrap { width: min(100%, 68vh); }
+#cover { display: block; width: 100%; height: auto; background: #fff; box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55); cursor: crosshair; touch-action: none; }
+
+.panel-strip { display: flex; gap: 10px; width: min(100%, 68vh); }
+.panel-card {
+  flex: 1; min-width: 0; margin: 0; border: 2px solid #3a2350; border-radius: 10px; overflow: hidden; cursor: grab;
+  background: #241431; transition: border-color 0.15s, transform 0.15s;
+}
+.panel-card.selected { border-color: #ff2e88; }
+.panel-card.drag-over { border-color: #ffb35c; transform: translateY(-3px); }
+.panel-card canvas { display: block; width: 100%; height: auto; }
+.panel-card figcaption { padding: 5px 6px; font-size: 12px; font-weight: 700; text-align: center; color: #d9cbe8; }
+
+/* Screenshot scenes: cover alone fills the viewport; editor scene is the page. */
+body.shot-cover .controls, body.shot-cover .panel-strip, body.shot-cover .drag-hint { display: none; }
+body.shot-cover { background: #fff; }
+body.shot-cover .app { padding: 0; max-width: none; }
+body.shot-cover .stage { width: 100%; }
+body.shot-cover .preview-wrap { width: 100%; }
+body.shot-cover #cover { width: 100vw; height: 100vh; object-fit: contain; box-shadow: none; cursor: default; }
+
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .controls { width: 100%; }
+  .preview-wrap, .panel-strip { width: 100%; }
+}
